@@ -22,6 +22,8 @@ import json
 import random
 import urllib.request
 
+# Testing for git purpose
+print("Added a print statement")
 # Server API URLs
 QUERY = "http://localhost:8080/query?id={}"
 
@@ -51,13 +53,15 @@ def getRatio(price_a, price_b):
 if __name__ == "__main__":
     # Query the price once every N seconds.
     for _ in (range(N)):
-        quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+        quotes = json.loads(urllib.request.urlopen(
+            QUERY.format(random.random())).read())
 
         """ ----------- Update to get the ratio --------------- """
         prices = {}
         for quote in quotes:
             stock, bid_price, ask_price, price = getDataPoint(quote)
             prices[stock] = price
-            print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+            print("Quoted %s at (bid:%s, ask:%s, price:%s)" %
+                  (stock, bid_price, ask_price, price))
 
         print("Ratio %s" % getRatio(price, price))
